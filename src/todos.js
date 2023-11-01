@@ -19,7 +19,7 @@ const todos = ({ navigation, route }) => {
       "https://6540e47345bedb25bfc2d34b.mockapi.io/react-lab-todos/TodoList"
     )
       .then((response) => response.json())
-      .then((json) => setTodos(json))
+      .then((json) => {setTodos(json);console.log("Reload");})
       .catch((error) => console.error(error));
 
     navigation.setOptions({
@@ -57,7 +57,7 @@ const todos = ({ navigation, route }) => {
       },
       title: "",
     });
-  }, []);
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View style={styles.searchSection}>
@@ -133,9 +133,8 @@ const styles = StyleSheet.create({
     color: "#171A1F",
   },
   TodoListScrollView: {
-    width: 334,
-    height: 500,
     marginTop: 20,
+    maxHeight:500,
   },
   addBtnView: {
     marginTop: 30,
