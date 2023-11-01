@@ -8,56 +8,62 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Feather, Ionicons } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
 
 const todos = ({ navigation, route }) => {
   const [todos, setTodos] = useState([]);
   const usName = route.params.usName;
-  useEffect(() => {
-    fetch(
-      "https://6540e47345bedb25bfc2d34b.mockapi.io/react-lab-todos/TodoList"
-    )
-      .then((response) => response.json())
-      .then((json) => {setTodos(json);console.log("Reload");})
-      .catch((error) => console.error(error));
 
-    navigation.setOptions({
-      headerRight: () => {
-        return (
-          <View style={{ flexDirection: "row", marginRight: 30 }}>
-            <Image
-              source={require("../assets/img/avt.png")}
-              style={{ width: 50, height: 50, borderRadius: 50 }}
-            />
-            <View style={{ marginLeft: 10 }}>
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: "#171A1F",
-                  fontWeight: "700",
-                  textAlign: "center",
-                }}
-              >
-                {usName}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: "#171A1F",
-                  fontWeight: "700",
-                  textAlign: "center",
-                }}
-              >
-                Have agrate day a head
-              </Text>
-            </View>
+  useFocusEffect(
+    useCallback(() => {
+      fetch(
+        "https://6540e47345bedb25bfc2d34b.mockapi.io/react-lab-todos/TodoList"
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          setTodos(json);
+        })
+        .catch((error) => console.error(error));
+    }, [navigation])
+  );
+
+  navigation.setOptions({
+    headerRight: () => {
+      return (
+        <View style={{ flexDirection: "row", marginRight: 30 }}>
+          <Image
+            source={require("../assets/img/avt.png")}
+            style={{ width: 50, height: 50, borderRadius: 50 }}
+          />
+          <View style={{ marginLeft: 10 }}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: "#171A1F",
+                fontWeight: "700",
+                textAlign: "center",
+              }}
+            >
+              {usName}
+            </Text>
+            <Text
+              style={{
+                fontSize: 14,
+                color: "#171A1F",
+                fontWeight: "700",
+                textAlign: "center",
+              }}
+            >
+              Have agrate day a head
+            </Text>
           </View>
-        );
-      },
-      title: "",
-    });
-  }, [navigation]);
+        </View>
+      );
+    },
+    title: "",
+  });
   return (
     <View style={styles.container}>
       <View style={styles.searchSection}>
@@ -74,7 +80,14 @@ const todos = ({ navigation, route }) => {
           <FlatList data={todos} renderItem={renderItem} />
         </SafeAreaView>
       </View>
-      <View style={styles.addBtnView}><Pressable style={styles.btnAdd} onPress={()=>navigation.navigate("Add",{usName:usName})}>+</Pressable></View>
+      <View style={styles.addBtnView}>
+        <Pressable
+          style={styles.btnAdd}
+          onPress={() => navigation.navigate("Add", { usName: usName })}
+        >
+          +
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -134,7 +147,7 @@ const styles = StyleSheet.create({
   },
   TodoListScrollView: {
     marginTop: 20,
-    maxHeight:500,
+    maxHeight: 500,
   },
   addBtnView: {
     marginTop: 30,

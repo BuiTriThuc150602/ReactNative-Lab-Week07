@@ -70,27 +70,31 @@ const add = ({ navigation, route }) => {
       <Pressable
         style={styles.button}
         onPress={() => {
-          fetch(
-            "https://6540e47345bedb25bfc2d34b.mockapi.io/react-lab-todos/TodoList",
-            {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-type": "application/json",
-              },
-              body: JSON.stringify({
-                name: usName,
-                title: title,
-              }),
-            }
-          )
-            .then((response) => response.json())
-            .then((json) => {
-              console.log(json);
-            })
-            .catch((error) => console.error(error));
-
-          navigation.navigate("Todos", { usName: usName });
+          if (title === "") return alert("Please input your job");
+          else {
+            fetch(
+              "https://6540e47345bedb25bfc2d34b.mockapi.io/react-lab-todos/TodoList",
+              {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-type": "application/json",
+                },
+                body: JSON.stringify({
+                  name: usName,
+                  title: title,
+                }),
+              }
+            )
+              .then((response) => response.json())
+              .then((json) => {
+                if (json != null)
+                  setTimeout(() => {
+                    navigation.goBack();
+                  }, 800);
+              })
+              .catch((error) => console.error(error));
+          }
         }}
       >
         FINISH
