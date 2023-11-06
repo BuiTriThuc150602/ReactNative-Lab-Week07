@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-const home = ({ navigation }) => {
+const Home = ({ navigation }) => {
   const [usName, setUsName] = useState("");
   return (
     <View style={styles.container}>
@@ -17,7 +17,7 @@ const home = ({ navigation }) => {
         source={require("../assets/img/logoApp.png")}
       />
       <Text style={styles.title}>
-        MANAGER YOUR <br /> TASK
+        MANAGER YOUR TASK
       </Text>
       <TextInput
         style={styles.input}
@@ -31,7 +31,7 @@ const home = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate("Todos", { usName: usName })}
       >
-        GET STARTED
+        <Text style={{color: "#FFFFFF",}}>GET STARTED</Text>
         <Ionicons
           name="arrow-forward"
           size={22}
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   title: {
+    width: 200,
     color: "#8353E2",
     fontSize: 24,
     fontWeight: "bold",
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   button: {
     width: 190,
     height: 44,
-    color: "#FFFFFF",
+    
     backgroundColor: "#00BDD6",
     borderRadius: 12,
     flexDirection: "row",
@@ -86,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default home;
+export default Home;

@@ -1,10 +1,10 @@
 import React from "react";
-import home from "./src/home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import todos from "./src/todos";
 import { Image, Text, View } from "react-native";
-import add from "./src/add";
+import Home from "./src/home";
+import Todos from "./src/todos";
+import Add from "./src/add";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -13,16 +13,16 @@ export default function App() {
       <Stack.Navigator >
         <Stack.Screen
           name="Home"
-          component={home}
+          component={Home}
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Todos"
-          component={todos}
+          component={Todos}
         />
         <Stack.Screen
           name="Add"
-          component={add}
+          component={Add}
           options={{headerLeft:()=>null}}
         />
       </Stack.Navigator>

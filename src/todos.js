@@ -12,7 +12,7 @@ import React, { useCallback, useState } from "react";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 
-const todos = ({ navigation, route }) => {
+const Todos = ({ navigation, route }) => {
   const [todos, setTodos] = useState([]);
   const usName = route.params.usName;
 
@@ -85,7 +85,9 @@ const todos = ({ navigation, route }) => {
           style={styles.btnAdd}
           onPress={() => navigation.navigate("Add", { usName: usName })}
         >
-          +
+          <Text style={{ color: "#FFFFFF", fontSize: 30, fontWeight: "700" }}>
+            +
+          </Text>
         </Pressable>
       </View>
     </View>
@@ -159,10 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00BDD6",
     justifyContent: "center",
     alignItems: "center",
-    color: "#FFFFFF",
-    fontSize: 30,
-    fontWeight: "700",
   },
 });
 
-export default todos;
+export default Todos;

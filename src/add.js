@@ -4,7 +4,7 @@ import { Pressable } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const add = ({ navigation, route }) => {
+const Add = ({ navigation, route }) => {
   const usName = route.params.usName;
   const [title, setTitle] = useState("");
   navigation.setOptions({
@@ -97,7 +97,8 @@ const add = ({ navigation, route }) => {
           }
         }}
       >
-        FINISH
+    
+        <Text style={{color: "#FFFFFF",}}>FINISH</Text>
         <Ionicons
           name="arrow-forward"
           size={22}
@@ -113,7 +114,7 @@ const add = ({ navigation, route }) => {
   );
 };
 
-export default add;
+export default Add;
 
 const styles = StyleSheet.create({
   container: {
@@ -146,7 +147,6 @@ const styles = StyleSheet.create({
   button: {
     width: 190,
     height: 44,
-    color: "#FFFFFF",
     backgroundColor: "#00BDD6",
     borderRadius: 12,
     flexDirection: "row",
